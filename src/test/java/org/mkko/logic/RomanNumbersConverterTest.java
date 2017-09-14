@@ -12,7 +12,7 @@ public class RomanNumbersConverterTest {
 	@Test
 	public void convertsExamplesFromAssignmentCorrectly() {
 
-		String _1999 = "MXMIX";
+		String _1999 = "MCMXCIX";
 		String _15 = "XV";
 		Assert.assertEquals(1999, RomanNumbersConverter.convertToArabicNumber(_1999));
 		Assert.assertEquals(15, RomanNumbersConverter.convertToArabicNumber(_15));
