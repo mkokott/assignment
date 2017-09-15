@@ -42,7 +42,7 @@ jobs:
             cp target/kauz-assignment-1.0-SNAPSHOT.jar /tmp/upload/deployments/app.jar 
             oc login https://api.starter-us-west-1.openshift.com:443 --username=$OPENSHIFT_USER --password=$OPENSHIFT_PASSWORD 
             oc start-build app --from-dir=/tmp/upload --follow --wait
-            oc logout \;
+            oc logout
           
       - run:
           name: save test results 
