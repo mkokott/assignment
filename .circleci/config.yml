@@ -36,11 +36,11 @@ jobs:
       - run: mvn package
       
       - run: 
-        name: deploy to openshift
-        command: |
-          mkdir -p /tmp/upload/deployments
-          pwd 
-          oc login https://api.starter-us-west-1.openshift.com:443 --username=$OPENSHIFT_USER --password=$OPENSHIFT_PASSWORD \;
+          name: deploy to openshift
+          command: |
+            mkdir -p /tmp/upload/deployments
+            pwd 
+            oc login https://api.starter-us-west-1.openshift.com:443 --username=$OPENSHIFT_USER --password=$OPENSHIFT_PASSWORD \;
           
       - run:
           name: save test results 
