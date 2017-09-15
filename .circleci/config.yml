@@ -40,7 +40,7 @@ jobs:
         command: |
           mkdir -p /tmp/upload/deployments
           pwd
-          oc login https://api.starter-us-west-1.openshift.com:443 -u $OPENSHIFT_USER -p $OPENSHIFT_PASSWORD
+          oc login https://api.starter-us-west-1.openshift.com:443 -u $OPENSHIFT_USER -p $OPENSHIFT_PASSWORD \;
           
       - run:
           name: save test results 
