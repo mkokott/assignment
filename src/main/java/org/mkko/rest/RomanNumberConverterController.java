@@ -1,5 +1,6 @@
 package org.mkko.rest;
 
+import org.mkko.data.ConverterResponse;
 import org.mkko.logic.RomanNumbersConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,12 +17,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class RomanNumberConverterController {
 
 	@RequestMapping(method = RequestMethod.GET, value = "/{romanNumber}")
-	public @ResponseBody String convertRomanNumber(@PathVariable String romanNumber) {
+	public @ResponseBody ConverterResponse convertRomanNumber(@PathVariable String romanNumber) {
+
+		String arabicNumber = "";
 
 		try {
-			return "" + RomanNumbersConverter.convertToArabicNumber(romanNumber);
+			arabicNumber += RomanNumbersConverter.convertToArabicNumber(romanNumber);
 		} catch (IllegalArgumentException e) {
-			return e.getMessage();
+			arabicNumber += e.getMessage();
 		}
+		return new ConverterResponse(romanNumber, arabicNumber);
 	}
 }
