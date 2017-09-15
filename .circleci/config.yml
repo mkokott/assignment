@@ -6,8 +6,8 @@ version: 2
 jobs:
   build:
     docker:
-      # specify the version you desire here
-      - image: circleci/openjdk:8-jdk
+      # basic circleci jdk 1.8 container + openshift CLI
+      - image: mk83ko/toolscontainer:circleci-openshift
       
     working_directory: ~/repo
     
