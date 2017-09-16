@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en">
+<title>Roman Number Converter</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+	Roman Number:
+	<input type="text" id="roman" value="MIX" />
+	<button onclick="convert()">Convert</button>
+	<br /> Arabic Number:
+	<input type="text" id="arabic" />
+	<br />
+	<br />
+
+	
+
+	<script>
+		function convert() {
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+			    if (this.readyState == 4) {
+			    	console.log("response: " + xhttp.responseText);
+			        var result = JSON.parse(this.responseText);
+			        document.getElementById("arabic").value = result.arabicNumber;
+			    }
+			};
+			xhttp.open('GET', "/convert/"
+					+ document.getElementById("roman").value, true);
+			xhttp.send();
+		}
+	</script>
+</body>
+</html>
