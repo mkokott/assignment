@@ -1,35 +1,77 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 
 <head lang="en">
-<title>Roman Number Converter</title>
+<title>Roman Numbers Converter</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>
+div.container {
+	width: 75%;
+}
+
+header {
+	margin-left: 25px;
+	margin-top: 25px;
+	padding : 1em;
+	color: white;
+	background-color: black;
+	clear: left;
+	text-align: left;
+	padding: 1em;
+}
+
+article {
+	margin-left: 30px;
+	border: 1px black;
+	padding: 1em;
+	overflow: hidden;
+}
+
+button {
+	float: right;
+	text-align: right;
+}
+
+input {
+	float: right;
+}
+</style>
 </head>
-<body>
 
-	Roman Number:
-	<input type="text" id="roman" value="MIX" />
-	<button onclick="convert()">Convert</button>
-	<br /> Arabic Number:
-	<input type="text" id="arabic" />
-	<br />
-	<br />
-
-	
-
+<body onload="setInputBackground()">
+	<div class="container">
+		<header>Roman Numbers Converter</header>
+		<article>
+			<p>Roman Number:<input type="text" id="roman" value="MIX" size="60" /></p>
+			<p>Arabic Number:<input type="text" id="arabic" readonly="readonly" style="backgroundColor: whitesmoke;" size="60" /></p>
+			<p><button onclick="convert()">Convert</button></p>
+		</article>
+	</div>
 	<script>
 		function convert() {
 			var xhttp = new XMLHttpRequest();
 			xhttp.onreadystatechange = function() {
-			    if (this.readyState == 4) {
-			    	console.log("response: " + xhttp.responseText);
-			        var result = JSON.parse(this.responseText);
-			        document.getElementById("arabic").value = result.arabicNumber;
-			    }
+				if (this.readyState == 4) {
+					console.log("response: " + xhttp.responseText);
+					var result = JSON.parse(this.responseText);
+					if (result.valid == true) {
+						document.getElementById("arabic").value = result.arabicNumber;
+						document.getElementById("arabic").style.backgroundColor = "whitesmoke";
+						document.getElementById("arabic").style.color = "black";
+					} else {
+						document.getElementById("arabic").value = result.arabicNumber;
+						document.getElementById("arabic").style.backgroundColor = "lightsalmon";
+					}
+				}
 			};
 			xhttp.open('GET', "/convert/"
 					+ document.getElementById("roman").value, true);
 			xhttp.send();
+		}
+		
+		function setInputBackground() {
+			document.getElementById("arabic").style.backgroundColor = "whitesmoke";
+			document.getElementById("arabic").style.color = "black";
 		}
 	</script>
 </body>

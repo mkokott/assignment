@@ -37,12 +37,14 @@ public class RomanNumberConverterController {
 
 		logger.info("converter called with argument " + romanNumber);
 		String arabicNumber = "";
+		boolean valid = true;
 
 		try {
 			arabicNumber += RomanNumbersConverter.convertToArabicNumber(romanNumber);
 		} catch (IllegalArgumentException e) {
+			valid = false;
 			arabicNumber += e.getMessage();
 		}
-		return new ConverterResponse(romanNumber, arabicNumber);
+		return new ConverterResponse(romanNumber, arabicNumber, valid);
 	}
 }
