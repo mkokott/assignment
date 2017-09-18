@@ -50,6 +50,13 @@ public class RomanNumbersConverterTest {
 		Assert.assertEquals(14, RomanNumbersConverter.convertToArabicNumber(_14));
 	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void simpleRuleSyntaxIsNotAllowed() {
+
+		String invalidRomanNumber = "MIIII";
+		Assert.assertTrue(RomanNumbersConverter.convertToArabicNumber(invalidRomanNumber) > 0);
+	}
+
 	@Test
 	public void converterIsCaseInsensitive() {
 
@@ -58,15 +65,21 @@ public class RomanNumbersConverterTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void simpleRuleSyntaxIsNotAllowed() {
+	public void invalidRomanNumberThrowsIllegalArgumentException() {
 
-		String invalidRomanNumber = "MIIX";
-		Assert.assertTrue(RomanNumbersConverter.convertToArabicNumber(invalidRomanNumber) > 0);
+		String invalidRomanNumber = "MXMIX";
+		Assert.assertEquals(1999, RomanNumbersConverter.convertToArabicNumber(invalidRomanNumber));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void emptyStringThrowsIllegalArgumentException() {
 
-		Assert.assertTrue(RomanNumbersConverter.convertToArabicNumber("") > 0);
+		RomanNumbersConverter.convertToArabicNumber("");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void illegalCharactersThrowsIllegalArgumentException() {
+
+		RomanNumbersConverter.convertToArabicNumber("illegal string with $peci@l chärß");
 	}
 }
